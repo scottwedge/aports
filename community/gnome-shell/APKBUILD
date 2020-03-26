@@ -1,7 +1,7 @@
 # Contributor: Rasmus Thomsen <oss@cogitri.dev>
 # Maintainer: Rasmus Thomsen <oss@cogitri.dev>
 pkgname=gnome-shell
-pkgver=3.34.4
+pkgver=3.36.0
 pkgrel=1
 pkgdesc="GNOME shell"
 url="https://wiki.gnome.org/Projects/GnomeShell"
@@ -21,7 +21,7 @@ depends="accountsservice
 	ttf-cantarell
 	adwaita-icon-theme
 	gnome-themes-standard"
-makedepends="gnome-desktop-dev
+makedepends="gnome-desktop-dev>=3.35.91
 	libxml2-dev
 	libcanberra-dev
 	gobject-introspection-dev
@@ -29,8 +29,8 @@ makedepends="gnome-desktop-dev
 	libsoup-dev
 	polkit-dev
 	gcr-dev
-	gjs-dev
-	mutter-dev
+	gjs-dev>=1.64.0
+	mutter-dev>=3.36.0
 	libcroco-dev
 	pulseaudio-dev
 	evolution-data-server-dev evolution-dev
@@ -40,7 +40,7 @@ makedepends="gnome-desktop-dev
 	ibus-dev
 	sassc
 	networkmanager-dev
-	network-manager-applet-dev
+	libnma-dev
 	gnome-control-center-dev
 	py3-setuptools
 	gnome-bluetooth-dev
@@ -79,4 +79,4 @@ package() {
 	setcap cap_sys_nice+ep "$pkgdir"/usr/bin/gnome-shell
 }
 
-sha512sums="17832780bcd91f9aedfd642881f4b17f52fe6844e7cc144a6ecac4e3e13ff889779ef24cf52e7f58e61bffc3fa3a3ef75d23c92ed3833ad42d00c49382284b89  gnome-shell-3.34.4.tar.xz"
+sha512sums="8e4b6d9e024b27696f2fe26b86582a35ddeb42341efd05c7f731255abc1661506c14d8260757d05b3ce00e6c2e96c443ea4c22c9e671e93c9e8ef6f632cd41d4  gnome-shell-3.36.0.tar.xz"

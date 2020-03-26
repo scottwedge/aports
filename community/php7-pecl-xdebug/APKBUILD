@@ -4,7 +4,7 @@
 # Maintainer: Andy Postnikov <apostnikov@gmail.com>
 pkgname=php7-pecl-xdebug
 _pkgname=xdebug
-pkgver=2.9.2
+pkgver=2.9.4
 pkgrel=0
 pkgdesc="PHP extension that provides functions for function traces and profiling - PECL"
 url="https://pecl.php.net/package/xdebug"
@@ -41,4 +41,4 @@ package() {
 	EOF
 }
 
-sha512sums="87de15d3ca82298a404e7b9f3a18efa50d6204c5b9dec499662adf43985d2aa58da352afdb3e8c753713974d902d9c9af033359ff7ac55e40b0c3315b6e1ba6e  php7-pecl-xdebug-2.9.2.tgz"
+sha512sums="8ea5977e2e625b2859b898b23f8d2b1b78951ff04e5368f1ed32eb064d5f99b14210a5dc3974fad93c4851ea73875c3fa20d7cec7484a6f786f4016375d5a406  php7-pecl-xdebug-2.9.4.tgz"

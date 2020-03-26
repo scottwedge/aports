@@ -7,15 +7,10 @@ pkgrel=0
 pkgdesc="R5RS and R7RS compatible scheme compiler and interpreter"
 url="https://call-cc.org/"
 arch="all"
-license="custom"
+license="BSD-3-Clause"
 depends="gcc libc-dev $pkgname-dev $pkgname-libs"
 subpackages="$pkgname-doc $pkgname-libs $pkgname-dev $pkgname-feathers::noarch"
 source="https://code.call-cc.org/releases/$pkgver/$pkgname-$pkgver.tar.gz"
-builddir="$srcdir"/$pkgname-$pkgver
-
-case "$CARCH" in
-armhf|armv7) options="!check" ;; # FIXME
-esac
 
 # secfixes:
 #   4.12.0-r3:
@@ -28,19 +23,16 @@ esac
 
 build() {
 	# chicken does not support parallel builds.
-	make -j1 PLATFORM=linux PREFIX=/usr \
-		-C "$builddir"
+	make -j1 PLATFORM=linux PREFIX=/usr
 }
 
 check() {
-	make -j1 PLATFORM=linux \
-		-C "$builddir" check
+	make -j1 PLATFORM=linux check
 }
 
 package() {
 	# chicken does not support parallel installs.
-	make -j1 PLATFORM=linux PREFIX=/usr DESTDIR="$pkgdir" \
-		-C "$builddir" install
+	make -j1 PLATFORM=linux PREFIX=/usr DESTDIR="$pkgdir" install
 
 	# Move documentation to /usr/share/doc.
 	mkdir -p "$pkgdir"/usr/share/doc/

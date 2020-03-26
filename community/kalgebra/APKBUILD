@@ -1,0 +1,32 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=kalgebra
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf" # armhf blocked by qt5-qtdeclarative
+url="https://edu.kde.org/kalgebra/"
+pkgdesc="2D and 3D Graph Calculator"
+license="GPL-2.0-or-later AND GFDL-1.2-only"
+makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev qt5-qtdeclarative-dev analitza-dev ki18n-dev kcoreaddons-dev kconfigwidgets-dev kwidgetsaddons-dev kio-dev kdoctools-dev ncurses-dev readline-dev"
+source="https://download.kde.org/stable/release-service/$pkgver/src/kalgebra-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang"
+options="!check" # No tests
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="9bc1957f8e851bc0d39a6e8953913d23f245f0bb1338c34e465d1cdddafd144bf80677335f1ae43530754530a2fd75c4bec8f6b3904082fee18bb235011611ab  kalgebra-19.12.3.tar.xz"

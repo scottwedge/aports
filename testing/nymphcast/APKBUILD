@@ -1,0 +1,35 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=nymphcast
+pkgver=0_git20200312
+pkgrel=0
+_commit="f0a67972b3ff31d086edf6ef9aaac800135a74ff"
+arch="all !armv7" # Assembly failure
+url="http://nyanko.ws/product_nymphcast.php"
+pkgdesc="Audio and video casting system with support for custom applications"
+license="BSD-3-Clause"
+depends="avahi"
+depends_dev="nymphrpc-dev"
+makedepends="$depends_dev sdl2-dev sdl2_image-dev ffmpeg-dev openssl-dev"
+source="$pkgname-$_commit.tar.gz::https://github.com/MayaPosch/NymphCast/archive/$_commit.tar.gz"
+subpackages="$pkgname-static $pkgname-dev $pkgname-server $pkgname-server-openrc"
+options="!check" # No tests
+builddir="$srcdir/NymphCast-$_commit"
+
+build() {
+	make -C src/client_lib
+	make -C src/server
+}
+
+package() {
+	DESTDIR="$pkgdir" PREFIX=/usr make -C src/client_lib install
+	DESTDIR="$pkgdir" PREFIX=/usr make -C src/server install-openrc
+}
+
+server() {
+	pkgdesc="$pkgdesc (server)"
+
+	DESTDIR="$subpkgdir" PREFIX=/usr make -C "$builddir"/src/server install
+}
+
+sha512sums="e9da7679f2f56159f7adec209a44fa7a6c0b8ded09470966de2a0f9a5386dce7785829c7b4cefd9c7988fb7221fc7408430d058b341cc13a9902e5ce4deda10c  nymphcast-f0a67972b3ff31d086edf6ef9aaac800135a74ff.tar.gz"

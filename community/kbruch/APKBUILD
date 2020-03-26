@@ -1,0 +1,32 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=kbruch
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf"
+url="https://edu.kde.org/kbruch/"
+pkgdesc="Practice Fractions"
+license="GPL-2.0-or-later AND GFDL-1.2-only"
+makedepends="extra-cmake-modules qt5-qtbase-dev kconfig-dev kcrash-dev kdoctools-dev ki18n-dev kwidgetsaddons-dev kxmlgui-dev"
+source="https://download.kde.org/stable/release-service/$pkgver/src/kbruch-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang"
+options="!check" # No tests
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="b660706d6132b0b2aa9e91a09a2f132e40de76ae956308926ff83890fab1bf2e171fbd29a8b1b78979929556931b6b1e4f52cacc3fc2db4248d5f95be5af9c61  kbruch-19.12.3.tar.xz"

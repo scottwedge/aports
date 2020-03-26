@@ -2,7 +2,7 @@
 # Maintainer: Oleg Titov <oleg.titov@gmail.com>
 
 pkgname=xmrig-proxy
-pkgver=5.7.0
+pkgver=5.10.0
 pkgrel=0
 pkgdesc="XMRig Proxy is a high performance Monero (XMR) Stratum protocol proxy"
 url="https://xmrig.com/xmrig-proxy"
@@ -14,10 +14,8 @@ subpackages="$pkgname-doc"
 source="$pkgname-$pkgver.tar.gz::https://github.com/xmrig/xmrig-proxy/archive/v$pkgver.tar.gz"
 
 build() {
-	mkdir build
-	cd build
-	cmake ..
-	make
+	cmake -B build -DCMAKE_BUILD_TYPE=none
+	make -C build
 }
 
 package() {
@@ -26,4 +24,4 @@ package() {
 	install -Dm 644 -t "$pkgdir"/usr/share/doc/$pkgname/ README.md
 }
 
-sha512sums="064909d55c8b6e2b731411182189e2eb97f92a4f95bfbdda6f174039caca2389c15fdb831dd4d67eb185ecbf7e6e14a17e3a3fe8971c3b94f6bdbac4730cd8c8  xmrig-proxy-5.7.0.tar.gz"
+sha512sums="83da6f55f76027d20b29af45b06e79be7b2ec464fdf1b6711ad076c42ac450a0b71ed7162874347a0f60f4c1f6b554593026dfc15d8b617ffcb8f4cf8e6507b2  xmrig-proxy-5.10.0.tar.gz"

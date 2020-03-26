@@ -1,0 +1,32 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=kig
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf"
+url="http://edu.kde.org/kig"
+pkgdesc="Interactive Geometry"
+license="GPL-2.0-or-later AND GFDL-1.2-only"
+makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kparts-dev kdoctools-dev ki18n-dev ktexteditor-dev kiconthemes-dev kconfigwidgets-dev karchive-dev kxmlgui-dev kcrash-dev kcoreaddons-dev"
+source="https://download.kde.org/stable/release-service/$pkgver/src/kig-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang"
+options="!check" # No tests
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="554b70c1ec7e62b52bdfb736cf17d685df68ffee00ebd4253e838f753e274c275a5df774f37240b2cb4778bfdc16b28c37f087772e61c82409397e92982e4109  kig-19.12.3.tar.xz"

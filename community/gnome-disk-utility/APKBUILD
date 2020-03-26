@@ -1,8 +1,8 @@
 # Contributor: Rasmus Thomsen <oss@cogitri.dev>
 # Maintainer: Rasmus Thomsen <oss@cogitri.dev>
 pkgname=gnome-disk-utility
-pkgver=3.34.4
-pkgrel=1
+pkgver=3.36.1
+pkgrel=0
 pkgdesc="GNOME libraries and applications for dealing with storage devices"
 url="https://wiki.gnome.org/Apps/Disks"
 arch="all !s390x"
@@ -29,4 +29,4 @@ package() {
 	DESTDIR="$pkgdir" ninja -C output install
 }
 
-sha512sums="3b0c40236e329fd4e0d709d8b7337627b7c84ab2a3973a2b1664a3c73e1f47ae17077000f242348a0342fdc64ca61c66a1c8db55a9ae5585a48004a7b699bc33  gnome-disk-utility-3.34.4.tar.xz"
+sha512sums="7565ef3647b4ae562af60e0cc70577268bb2baa54ece3859e5dfbd5e661a963788598768d591592d1dee3541673331f99c2bdb947a2a0af09cb6096887dc71fd  gnome-disk-utility-3.36.1.tar.xz"

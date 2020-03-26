@@ -1,8 +1,8 @@
 # Contributor: Leo <thinkabit.ukim@gmail.com>
 # Maintainer: Leo <thinkabit.ukim@gmail.com>
 pkgname=kvantum
-pkgver=0.14.1
-pkgrel=2
+pkgver=0.15.1
+pkgrel=0
 pkgdesc="SVG-based theme engine for Qt5"
 options="!check" # No testsuite
 url="https://github.com/tsujan/Kvantum"
@@ -26,7 +26,7 @@ build() {
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DENABLE_QT4=OFF \
-		${CMAKE_CROSSOPTS} .
+		$CMAKE_CROSSOPTS .
 	ninja
 }
 
@@ -35,4 +35,4 @@ package() {
 	rm -rf "$pkgdir"/usr/share/kde4
 }
 
-sha512sums="18faa895bb6affa1744d15aa5b64636c49f7780eddca62ecee18c133702a156bca055cda473af9ea72e1d6de17fd86c4d7212bd16c544030d96d8afa4f5aff69  kvantum-0.14.1.tar.gz"
+sha512sums="5922722b7fa5e1e883bf25ae24ffcd2c05189ec26eb89631a7b6a087a6ffe16c46ba9a5ff9fb32df34d4591faecc2044e2c71fc508a2f5f9e3a733c511190a4b  kvantum-0.15.1.tar.gz"

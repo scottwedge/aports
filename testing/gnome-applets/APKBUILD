@@ -1,0 +1,37 @@
+# Contributor: Rasmus Thomsen <oss@cogitri.dev>
+# Maintainer: Rasmus Thomsen <oss@cogitri.dev>
+pkgname=gnome-applets
+pkgver=3.36.1
+pkgrel=0
+pkgdesc="Small programs for the panel"
+url="https://wiki.gnome.org/Projects/GnomeApplets"
+arch="all !s390x !ppc64le !armhf" # missing dep: gnome-panel
+license="GPL-2.0-or-later"
+depends="adwaita-icon-theme"
+makedepends="gtk+3.0-dev glib-dev libgtop-dev libwnck3-dev libnotify-dev upower-dev
+	dbus-glib-dev adwaita-icon-theme-dev libxml2-dev libgweather-dev polkit-dev
+	gucharmap-dev intltool gnome-panel-dev itstool cpupower-dev tracker-dev"
+subpackages="$pkgname-doc $pkgname-lang"
+source="https://download.gnome.org/sources/gnome-applets/${pkgver%.*}/gnome-applets-$pkgver.tar.xz"
+
+build() {
+	./configure \
+		--build=$CBUILD \
+		--host=$CHOST \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--mandir=/usr/share/man \
+		--localstatedir=/var \
+		--enable-mini-commander
+	make
+}
+
+check() {
+	make check
+}
+
+package() {
+	make DESTDIR="$pkgdir" install
+}
+
+sha512sums="f00302e6c7aab9111935abdaeeccd465b109ff864754b8cee8c37db578d43de869bcdf7dfad8ef392655758e8ee638e8a006c6a0f947f85c7391b13a4e1ead9b  gnome-applets-3.36.1.tar.xz"

@@ -3,8 +3,8 @@
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=perl-encode
 _pkgreal=Encode
-pkgver=3.02
-pkgrel=1
+pkgver=3.05
+pkgrel=0
 pkgdesc="character encodings in Perl"
 url="https://metacpan.org/release/Encode/"
 arch="all"
@@ -65,4 +65,4 @@ doc() {
 	done
 }
 
-sha512sums="9a2ccb01f23e9fd27cf3f50ee0dfdfdd2a1b299215d56d7bf77f3adadd85d40a2cbd884c2f4980752e0e365e241252e4672222b239568259ae9701f188d9cb00  Encode-3.02.tar.gz"
+sha512sums="463a3356358b95ab13be456cdb69994b7e38aecba2417933f67ea5d36d55252bf673c0499ceb3440ada2053b63f878a7840037bbe00b0140a2d98eb101ac9ad4  Encode-3.05.tar.gz"

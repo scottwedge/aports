@@ -1,0 +1,47 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=rocs
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf"
+url="https://kde.org/applications/education/org.kde.rocs"
+pkgdesc="Graph Theory IDE"
+license="GPL-2.0-or-later AND (LGPL-2.1-only OR LGPL-3.0-only) AND GFDL-1.2-only"
+makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtwebkit-dev qt5-qtsvg-dev qt5-qtxmlpatterns-dev karchive-dev kconfig-dev kcoreaddons-dev kcrash-dev kdeclarative-dev ki18n-dev kitemviews-dev ktexteditor-dev kxmlgui-dev kdoctools-dev boost-dev grantlee-dev"
+checkdepends="xvfb-run"
+source="https://download.kde.org/stable/release-service/$pkgver/src/rocs-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang $pkgname-dev"
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+
+	# TestTgfFileFormat, TestRocs1FileFormat, TestRocs2FileFormat, and
+	# graphtheory-test_graphoperations are broken
+	# TestProject requires OpenGL
+	local skipped_tests="("
+	local tests="
+		TestTgfFileFormat
+		TestRocs1FileFormat
+		TestRocs2FileFormat
+		graphtheory-test_graphoperations
+		TestProject"
+	for test in $tests; do
+		skipped_tests="$skipped_tests|$test"
+	done
+	skipped_tests="$skipped_tests)"
+	CTEST_OUTPUT_ON_FAILURE=TRUE xvfb-run ctest -E "$skipped_tests"
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="1b4839197e5b40460a517221da4328c9283e4618eadf0dbeb20b7d5019a97f8fbac26dbf7c6a1b9b481bc4da8436ea6e632e38c1d6b33b1cb235055c76855984  rocs-19.12.3.tar.xz"

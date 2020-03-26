@@ -1,8 +1,8 @@
 # Contributor: Kevin Daudt <kdaudt@alpinelinux.org>
 # Maintainer: Kevin Daudt <kdaudt@alpinelinux.org>
 pkgname=atools
-pkgver=18.12.3
-pkgrel=1
+pkgver=18.14.0
+pkgrel=0
 pkgdesc="Auxilary scripts for abuild"
 url="https://gitlab.alpinelinux.org/Leo/atools"
 arch="noarch"
@@ -25,4 +25,4 @@ package() {
 	DESTDIR="$pkgdir" redo install
 }
 
-sha512sums="22784dffa2e1a5e047d16be2f4c5e63cbe7ee08058dbaaae6e4c02dbf13e6e4c8b97ddfc1e514f63c522b85a4f387704775652ff332280a2f9c266ec1bbc5dbf  atools-18.12.3.tar.gz"
+sha512sums="6fcc3cc039a21d809da498447354f15b312aaf3a9d9aa647dbb102643a69b01e03faafa0f2bdde961e12e81b03180bd692cabe9948d242fd35f40034d1c62794  atools-18.14.0.tar.gz"

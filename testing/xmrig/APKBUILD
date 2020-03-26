@@ -1,7 +1,7 @@
 # Contributor: Oleg Titov <oleg.titov@gmail.com>
 # Maintainer: Oleg Titov <oleg.titov@gmail.com>
 pkgname=xmrig
-pkgver=5.7.0
+pkgver=5.10.0
 pkgrel=0
 pkgdesc="XMRig is a high performance Monero (XMR) miner"
 url="https://xmrig.com/"
@@ -21,7 +21,7 @@ esac
 build() {
 	mkdir build
 	cd build
-	cmake .. $CMAKE_CROSSOPTS
+	cmake .. $CMAKE_CROSSOPTS -DCMAKE_BUILD_TYPE=None
 	make
 }
 
@@ -31,4 +31,4 @@ package() {
 	install -Dm 644 -t "$pkgdir"/usr/share/doc/$pkgname/ README.md
 }
 
-sha512sums="a61807ca80d15d80e591f85190c692071ff26d8703ec17206c393da3a5d1899108471b71bda59709cb1d701724d57bf5acf2e860de570b53ee20447bbf74c987  xmrig-5.7.0.tar.gz"
+sha512sums="b1e8841aaae6d9eaaa401ac4b237bb6f4b08526ef8cd42ee0f9bccb03ea5bc4d57d3ca6a55c33afb8add42a27448bf3c4d04eb12dfff15baf3ed2e42c7c68552  xmrig-5.10.0.tar.gz"

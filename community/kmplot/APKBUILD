@@ -1,0 +1,32 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=kmplot
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf"
+url="http://edu.kde.org/kmplot"
+pkgdesc="Mathematical Function Plotter"
+license="GPL-2.0-or-later AND GFDL-1.2-only"
+makedepends="extra-cmake-modules qt5-qtbase-dev qt5-qtsvg-dev kcrash-dev kguiaddons-dev ki18n-dev kparts-dev kwidgetsaddons-dev kdoctools-dev kdbusaddons-dev"
+source="https://download.kde.org/stable/release-service/$pkgver/src/kmplot-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang"
+options="!check" # No tests
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="33a72a15d2b6045bd95d75dd70d44b75b2e045b55dacf787dbc4427e9ee26918b2dcce2a45ef98a9ff1d4ae2c1faf6fd69bcd21b18d3fac302687ac1872c9d95  kmplot-19.12.3.tar.xz"

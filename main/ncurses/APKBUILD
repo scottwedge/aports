@@ -1,6 +1,6 @@
 # Maintainer: Natanael Copa <ncopa@alpinelinux.org>
 pkgname=ncurses
-pkgver=6.2_p20200222
+pkgver=6.2_p20200308
 _ver=${pkgver/_p/-}
 pkgrel=0
 pkgdesc="Console display library"
@@ -53,7 +53,7 @@ package() {
 		[ -z "$termfile" ] && continue
 
 		install -d "$pkgdir"/etc/terminfo/$basedir
-		mv ${termfile} "$pkgdir"/etc/terminfo/$basedir/
+		mv $termfile "$pkgdir"/etc/terminfo/$basedir/
 		ln -s ../../../../etc/terminfo/$basedir/$i \
 			"$pkgdir"/usr/share/terminfo/$basedir/$i
 	done
@@ -128,4 +128,4 @@ static() {
 	mv "$pkgdir"/usr/lib/*.a "$subpkgdir"/usr/lib/
 }
 
-sha512sums="2e77d6786a077ae8a8acca9dfe16c73f82abc5e3705a5086dbdfc1c9458cedc775833f7e8d99d0181bf24faf4f4215361a6fc892ddccfe22e95dfc35abf486ce  ncurses-6.2-20200222.tgz"
+sha512sums="27a0e5e5a89a332188b05f62066b6b7d613c37685e89bd17fa5287c52a120b8c3935b808e66280cf80b2254d030f911fe309f921946c343672078974d2a331b9  ncurses-6.2-20200308.tgz"

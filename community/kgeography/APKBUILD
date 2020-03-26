@@ -1,0 +1,32 @@
+# Contributor: Bart Ribbers <bribbers@disroot.org>
+# Maintainer: Bart Ribbers <bribbers@disroot.org>
+pkgname=kgeography
+pkgver=19.12.3
+pkgrel=0
+arch="all !armhf"
+url="https://edu.kde.org/kgeography"
+pkgdesc="Geography Trainer"
+license="GPL-2.0-or-later"
+makedepends="extra-cmake-modules qt5-qtbase-dev kxmlgui-dev kwidgetsaddons-dev kcoreaddons-dev kconfigwidgets-dev ki18n-dev kitemviews-dev kiconthemes-dev kcrash-dev kdoctools-dev"
+source="https://download.kde.org/stable/release-service/$pkgver/src/kgeography-$pkgver.tar.xz"
+subpackages="$pkgname-doc $pkgname-lang"
+options="!check" # No tests
+
+build() {
+	cmake -B build \
+		-DCMAKE_BUILD_TYPE=None \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib
+	make -C build
+}
+
+check() {
+	cd build
+	CTEST_OUTPUT_ON_FAILURE=TRUE ctest
+}
+
+package() {
+	DESTDIR="$pkgdir" make -C build install
+}
+
+sha512sums="fcd99351c80750c79b50ec78bfb0864f5f3fb08d9ec94af5d2fb6907a537c02bae9ff2c70437eb58f22c4a873ecdce4ac7e1ab0d55a8140d2671d6ed89b743d3  kgeography-19.12.3.tar.xz"
