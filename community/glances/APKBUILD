@@ -20,7 +20,7 @@ build() {
 }
 
 check() {
-	python3 unitest.py
+	python3 unittest.py
 }
 
 package() {
